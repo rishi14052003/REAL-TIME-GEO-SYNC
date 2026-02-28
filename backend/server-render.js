@@ -7,7 +7,6 @@ const { config } = require('./config');
 const app = express();
 const server = http.createServer(app);
 
-// CORS configuration
 app.use(cors({
   origin: ['https://geosync-frontend.onrender.com', 'http://localhost:5173'],
   methods: ['GET', 'POST'],
@@ -16,7 +15,6 @@ app.use(cors({
 
 app.use(express.json());
 
-// Socket.io configuration
 const io = new Server(server, {
   cors: {
     origin: ['https://geosync-frontend.onrender.com', 'http://localhost:5173'],
@@ -25,12 +23,9 @@ const io = new Server(server, {
   }
 });
 
-// Store room data
 const rooms = new Map();
 
-// Socket.io connection handling
 io.on('connection', (socket) => {
-  console.log(`User connected: ${socket.id}`);
 
   socket.on('join-room', ({ roomId, role }) => {
     socket.join(roomId);
@@ -49,7 +44,6 @@ io.on('connection', (socket) => {
       socket.emit('tracker-status', { hasTracker: !!room.tracker });
     }
     
-    console.log(`User ${socket.id} joined room ${roomId} as ${role}`);
   });
 
   socket.on('map-update', ({ roomId, center, zoom }) => {
@@ -57,9 +51,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    console.log(`User disconnected: ${socket.id}`);
     
-    // Remove user from rooms
     rooms.forEach((room, roomId) => {
       if (room.tracker === socket.id) {
         room.tracker = null;
@@ -71,13 +63,10 @@ io.on('connection', (socket) => {
   });
 });
 
-// Health check endpoint
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Start server
 const PORT = process.env.PORT || config.server.port;
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port ${PORT}`);
 });

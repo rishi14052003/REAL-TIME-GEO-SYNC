@@ -16,7 +16,6 @@ const HUD = ({ role, room, connected }) => {
   return (
     <div className="bg-black/30 backdrop-blur-md rounded-xl p-4 shadow-xl">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {/* Room Info */}
         <div className="flex items-center gap-3">
           <Hash size={18} className="text-purple-400" />
           <div>
@@ -25,7 +24,6 @@ const HUD = ({ role, room, connected }) => {
           </div>
         </div>
 
-        {/* Coordinates */}
         <div className="flex items-center gap-3">
           <MapPinned size={18} className="text-purple-400" />
           <div>
@@ -38,7 +36,6 @@ const HUD = ({ role, room, connected }) => {
           </div>
         </div>
 
-        {/* Connection Status */}
         <div className="flex items-center gap-3">
           {connected ? <Wifi size={18} className="text-green-400" /> : <WifiOff size={18} className="text-red-400" />}
           <div>
@@ -50,7 +47,6 @@ const HUD = ({ role, room, connected }) => {
         </div>
       </div>
 
-      {/* Role Indicator */}
       <div className="mt-4 pt-4 border-t border-white/20">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">

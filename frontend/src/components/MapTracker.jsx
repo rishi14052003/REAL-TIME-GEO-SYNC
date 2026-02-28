@@ -81,7 +81,7 @@ const MapTracker = ({ room, setRoom, onConnect }) => {
         </div>
       </div>
 
-      <div className="h-96 rounded-xl overflow-hidden">
+      <div className="h-[500px] rounded-xl overflow-hidden border border-purple-500/30">
         <MapContainer
           center={position}
           zoom={zoom}
