@@ -141,9 +141,28 @@ Visit `http://localhost:5173` to access the application.
 
 ## 🌐 Deployment
 
+### Production Deployment
+
+**Frontend**: Deployed on Netlify  
+**Backend**: Deployed on Render
+
+The application is currently running in production with real-time map synchronization capabilities.
+
 ### Frontend Deployment Options
 
-#### 🚀 Vercel (Recommended)
+#### 🌊 Netlify (Current Production)
+```bash
+# Build and deploy
+cd frontend
+npm run build
+netlify deploy --prod --dir=dist
+```
+
+**Environment Variables on Netlify:**
+- `VITE_GOOGLE_MAPS_API_KEY`
+- `VITE_BACKEND_URL` (your deployed backend URL)
+
+#### 🚀 Vercel (Alternative)
 ```bash
 # Build for production
 cd frontend
@@ -157,14 +176,6 @@ vercel --prod
 - `VITE_GOOGLE_MAPS_API_KEY`
 - `VITE_BACKEND_URL` (your deployed backend URL)
 
-#### 🌊 Netlify
-```bash
-# Build and deploy
-cd frontend
-npm run build
-netlify deploy --prod --dir=dist
-```
-
 #### ⚡ Other Options
 - **GitHub Pages** - Free static hosting
 - **AWS S3 + CloudFront** - Scalable CDN solution
@@ -172,7 +183,18 @@ netlify deploy --prod --dir=dist
 
 ### Backend Deployment Options
 
-#### 🚂 Railway (Recommended)
+#### 🚂 Render (Current Production)
+```bash
+# Deploy backend to Render
+# Connect your repository and configure build settings
+# Render automatically deploys from your main branch
+```
+
+**Environment Variables on Render:**
+- `PORT` (auto-assigned by Render)
+- `FRONTEND_ORIGIN` (your Netlify URL)
+
+#### 🐳 Railway (Alternative)
 ```bash
 # Deploy backend to Railway
 railway login
@@ -182,17 +204,9 @@ railway up
 
 **Environment Variables on Railway:**
 - `PORT` (auto-assigned by Railway)
-- `FRONTEND_ORIGIN` (your Vercel URL)
-
-#### 🐳 Heroku
-```bash
-# Deploy to Heroku
-heroku create your-app-name
-git push heroku main
-```
+- `FRONTEND_ORIGIN` (your frontend URL)
 
 #### ☁️ Other Options
-- **Render** - Modern cloud platform
 - **DigitalOcean App Platform** - Simple deployment
 - **AWS EC2 + Elastic Beanstalk** - Enterprise solution
 
