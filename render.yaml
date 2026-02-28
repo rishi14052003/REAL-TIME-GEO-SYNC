@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: geosync-backend
+    env: node
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "node server-render.js"
+    envVars:
+      - key: NODE_ENV
+        value: production
+    healthCheckPath: /health

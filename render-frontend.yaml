@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: geosync-frontend
+    env: static
+    plan: free
+    buildCommand: "npm install && npm run build"
+    publishDir: frontend/dist
+    envVars:
+      - key: NODE_ENV
+        value: production
+    routes:
+      - type: rewrite
+        source: /api/*
+        destination: https://geosync-backend.onrender.com
